@@ -49,10 +49,10 @@ include 'includes/common.php';?>
 						</div>
 						<nav>
 							<ul>
-								<li><a href="#intro">Add People</a></li>
+								<li><a href="#add">Add People</a></li>
 								<li><a href="#chat">Message</a></li>
 								<li><a href="#group">Group</a></li>
-								<li><a href="#contact">Settings</a></li>
+								<li><a href="#settings">Settings</a></li>
 								<!--<li><a href="#elements">Elements</a></li>-->
 							</ul>
 						</nav>
@@ -62,7 +62,7 @@ include 'includes/common.php';?>
 					<div id="main">
 
 						<!-- Intro -->
-							<article id="intro">
+							<article id="add">
 							<form action="add_people.php" method="post">
 								<h2 class="major">Add People</h2>
 							    <input type="text" name="userName" id="" class="form-control" placeholder="Enter UserName" style="width:300px;">
@@ -152,7 +152,7 @@ include 'includes/common.php';?>
 							<article id="group">
 								<h2 class="major">GROUP</h2>
 								     
-         <div class="chat form-control" style="height:300px; width:557px; background-color:#54545c;">
+         <div class="chat form-control" style="height:300px; width:557px; background-color:#54545c; overflow:scroll;">
         <?php
          $query="select *from users order by id ASC";
          $result=mysqli_query($con,$query);
@@ -161,7 +161,13 @@ include 'includes/common.php';?>
              
              while($row=mysqli_fetch_array($result))
              {
-                 ?><h4><?php echo "[".$row['time']."]   ".$row['name'].":".$row['message'];?></h4><hr>
+                 ?>
+                    <br><h4 style="font:16px italic;margin-left:20px;" class="text-center">
+                     <span style="color:white;  background-color:black;"><?php echo $row['name'];?>:-</span>
+                     <span style="font:14px cursive;"><?php echo $row['message'];?></span>
+                     
+                     
+                 </h4><hr style="margin-top:-5px;">
                       
                  <?php
              }
@@ -170,8 +176,8 @@ include 'includes/common.php';?>
              
          }
         ?>
-        </div> 
-          <form method="post" action="database.php">
+        </div> <br>
+          <form method="post" action="group.php">
         <div class="name">
             <label><h4 class="text">Name:</h4></label>
         <input type="text" name="user" size="50">
@@ -180,12 +186,13 @@ include 'includes/common.php';?>
         </div>
         
         
-        
+        <br>
         <div class="message">
-       <label><h4 class="text">Text:</h4></label>&nbsp;&nbsp;&nbsp; 
+       <label><h4 class="text">Text:</h4></label> 
        <input type="text" name="message" size="50">
         
         </div>
+        <br>
         <div class="submit">
         <input type="submit" name="submit" value="Shout It" class="shout_btn">
         
@@ -199,16 +206,16 @@ include 'includes/common.php';?>
 							</article>
 
 						<!-- Contact -->
-							<article id="contact">
+							<article id="settings">
 								<h2 class="major">SETTINGS</h2>
-								<form method="post" action="setting.php">
+								<form method="post" action="settings_script.php">
 									<div class="field half first">
-										<label for="name">New Passord</label>
-										<input type="text" name="name" id="name" />
+										<label for="name">Old-Password</label>
+										<input type="text" name="old" id="name" />
 									</div>
 									<div class="field half">
-										<label for="email">RE-TYPE PASSWORD</label>
-										<input type="text" name="email" id="email" />
+										<label for="email">NEW-PASSWORD</label>
+										<input type="text" name="new" id="email" />
 									</div>
 									
 									<ul class="actions">
